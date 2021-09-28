@@ -12,7 +12,7 @@ export const ROUTES: RouteInfo[] = [
     { path: '/wallets', title: 'Wallets', icon: 'account_balance_wallet', class: ''},
     { path: '/targets', title: 'Targets', icon: 'track_changes', class: ''},
     // { path: '/user-profile', title: 'User Profile',  icon:'person', class: '' },
-    { path: '/table-list', title: 'Table List',  icon:'content_paste', class: '' },
+    // { path: '/table-list', title: 'Table List',  icon:'content_paste', class: '' },
     // { path: '/notifications', title: 'Notifications',  icon:'notifications', class: '' },
 ];
 

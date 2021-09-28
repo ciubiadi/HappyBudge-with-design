@@ -59,6 +59,7 @@
     "@angular/cli": "12.1.2",
     "@angular/compiler-cli": "12.1.2",
     "@angular/language-service": "12.1.2",
+    "@netlify-builder/deploy": "^4.1.2",
     "@types/bootstrap": "4.5.0",
     "@types/chartist": "0.11.1",
     "@types/googlemaps": "3.43.3",
