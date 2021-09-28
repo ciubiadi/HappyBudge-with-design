@@ -1,0 +1,33 @@
+.card-title {
+    text-transform: capitalize;
+}
+
+.actions {
+    display:flex;
+    justify-content: flex-end;
+}
+
+.modal-footer button { 
+    margin: 0.6em;
+}
+
+.modal-body input,.modal-body textarea {
+    padding: 0.6em 0;
+    margin: 0.6em;
+}
+
+mat-card-title {
+    text-transform: capitalize;
+}
+
+.search-wallet {
+    padding: 1em;
+}
+
+.wallets-item {
+    margin: 1em 0;
+}
+
+.form-field-full-width {
+    width: 100%;
+}
