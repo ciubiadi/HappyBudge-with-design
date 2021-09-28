@@ -26,6 +26,9 @@
               <mat-card *ngFor="let wallet of walletsData | filter : walletWord" class="wallets-item">
                 <mat-card-title>{{ wallet.name }}</mat-card-title>
                 <mat-card-subtitle>{{ wallet.description }}</mat-card-subtitle>
+                <mat-card-content>
+                  <p>Revenue: $1321</p>
+                </mat-card-content>
                 <button class="btn btn-secondary" routerLink="/wallets/{{ wallet.id }}" style="float:left">Open Wallet</button>
                 <mat-card-actions align="end" class="actions">
                   <button class="btn btn-info" (click)="onEdit(wallet)"  data-toggle="modal" data-target="#exampleModal">Edit</button>
