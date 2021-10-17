@@ -55,11 +55,17 @@
             <h5 class="card-title text-center text-uppercase">Transactions</h5>
           </div>
           <div class="card-body py-5">
-            <mat-form-field appearance="standard">
-              <mat-label>Filter</mat-label>
-              <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Ex. Mia" #input>
-            </mat-form-field>
-
+            <div class="flex-div" style="display:flex; justify-content: space-between;">
+              <mat-form-field appearance="standard" style="width: 20%">
+                <mat-label>Filter</mat-label>
+                <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Ex. Mia" #input>
+              </mat-form-field>
+              <div class="add-new-transaction">
+                <button class="btn btn-success" (click)="clickAddTransaction()" data-toggle="modal" data-target="#exampleModal">
+                  Add Entry
+                </button>
+              </div>
+            </div>
             <table mat-table [dataSource]="dataSource" matSort>
               <ng-container matColumnDef="id">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header class="text-primary">Id</th>
@@ -80,7 +86,7 @@
               </ng-container>
               <ng-container matColumnDef="amount">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header class="text-primary"> amount </th>
-                <td mat-cell *matCellDef="let element">{{element.amount}}</td>
+                <td mat-cell *matCellDef="let element">{{element.amount}} {{ element.currency }}</td>
               </ng-container>
               <ng-container matColumnDef="date">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header class="text-primary"> date </th>
@@ -90,10 +96,10 @@
                 <th mat-header-cell *matHeaderCellDef mat-sort-header class="text-primary"> Actions </th>
                 <td mat-cell *matCellDef="let element">
                   <div class="actions">
-                    <button class="btn btn-info" data-toggle="modal" data-target="#exampleModal">
+                    <button class="btn btn-info" (click)="onEdit(element)" data-toggle="modal" data-target="#exampleModal">
                       <mat-icon>edit</mat-icon>
                     </button>
-                    <button class="btn btn-danger">
+                    <button class="btn btn-danger" (click)="deleteTransaction(element)">
                       <mat-icon>delete</mat-icon>
                     </button>
                   </div>
@@ -115,6 +121,56 @@
         </div>
       </div>
     </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Transaction Details</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form [formGroup]="formTransaction">
+              <mat-form-field class="form-field-full-width" appearance="fill">
+                <mat-label for="transactionTitle">Transaction Title</mat-label>
+                <input type="text" formControlName="transactionTitle"  id="transactionTitle" 
+                aria-describedby="transactionTitle" matInput>
+              </mat-form-field>
+              <mat-form-field class="form-field-full-width" appearance="fill">
+                <mat-label for="transactionType">Transaction Type</mat-label>
+                <input type="text" formControlName="transactionType" id="transactionType" aria-describedby="transactionType" matInput>
+              </mat-form-field>
+              <mat-form-field class="form-field-full-width" appearance="fill">
+                <mat-label for="transactionDescription">Transaction Description</mat-label>
+                <textarea type="text" formControlName="transactionDescription" id="transactionDescription" 
+                aria-describedby="transactionDescription" 
+                max-rows="2" placeholder="Details about transaction..." matInput></textarea>
+              </mat-form-field>
+              <mat-form-field class="form-field-full-width" appearance="fill">
+                <mat-label for="transactionAmount">Transaction Amount</mat-label>
+                <input type="text" formControlName="transactionAmount" id="transactionAmount" aria-describedby="transactionAmount"
+                 matInput>
+              </mat-form-field>
+              <mat-form-field class="form-field-full-width" appearance="fill">
+                <mat-label for="transactionDate">Transaction Date</mat-label>
+                <input type="text" formControlName="transactionDate" id="transactionDate" aria-describedby="transactionDate" matInput>
+              </mat-form-field>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" id="cancel" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" *ngIf="showAdd; else showUpdate" class="btn btn-success" (click)="postTransactionDetails()">Add Transaction</button>
+            <ng-template #showUpdate>
+              <button type="button" class="btn btn-info text-white" (click)="updateTransactionDetails()">Edit Transaction</button>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
   <div class="footer-actions">
     <button mat-fab color="primary" aria-label="Go buton" (click)="goBack()" style="position: fixed; bottom: 15px; right: 15px; z-index: 2" >

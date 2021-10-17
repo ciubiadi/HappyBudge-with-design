@@ -7,7 +7,7 @@ import { map } from 'rxjs/operators';
 })
 export class TransactionService {
 
-  private transactionsUrl = 'http://localhost:3000/transactions';
+  private transactionsUrl = 'http://localhost:3000/transactions/';
   
   constructor(private http : HttpClient) { }
 
