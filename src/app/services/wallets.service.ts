@@ -11,6 +11,7 @@ import { WalletModel } from '../models/wallet.model';
 export class WalletsService {
 
   private walletsUrl = 'http://localhost:3000/wallets/';  // URL to web api
+  // private walletsUrl = 'https://jsonware.com/json/39557ece0136b6df9fb4090f90755034.json';  // URL to web api
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -34,35 +35,35 @@ export class WalletsService {
   
     /* WALLETS */
     postWallet(data : any) {
-      return this.http.post<any>("http://localhost:3000/wallets", data)
+      return this.http.post<any>(this.walletsUrl, data)
       .pipe(map((res : any) => {
         return res;
       }))
     }
   
     getWallets() {
-      return this.http.get<any>("http://localhost:3000/wallets")
+      return this.http.get<any>(this.walletsUrl)
       .pipe(map((res : any) => {
         return res;
       }))
     }
 
     getWallet(id: number) {
-      return this.http.get<any>("http://localhost:3000/wallets/" + id)
+      return this.http.get<any>(this.walletsUrl + id)
       .pipe(map((res : any) => {
         return res;
       }))
     }
 
     getWalletTransactions(id: number) {
-      return this.http.get<any>("http://localhost:3000/wallets/" + id + "/transactions")
+      return this.http.get<any>(this.walletsUrl + id + "/transactions")
       .pipe(map((res : any) => {
         return res;
       }))
     }
 
     getWalletTransactionsType(id: number, type: string) {
-      return this.http.get<any>("http://localhost:3000/wallets/" + id + "/transactions?type=" + type)
+      return this.http.get<any>(this.walletsUrl + id + "/transactions?type=" + type)
       .pipe(map((res : any) => {
         return res;
       }))
@@ -73,14 +74,14 @@ export class WalletsService {
   // }
   
     updateWallet(data :any, id: number) {
-      return this.http.put<any>("http://localhost:3000/wallets/" + id, data)
+      return this.http.put<any>(this.walletsUrl + id, data)
       .pipe(map((res : any) => {
         return res;
       }))
     }
   
     deleteWallet(id: number) {
-      return this.http.delete<any>("http://localhost:3000/wallets/" + id)
+      return this.http.delete<any>(this.walletsUrl + id)
       .pipe(map((res : any) => {
         return res;
       }))

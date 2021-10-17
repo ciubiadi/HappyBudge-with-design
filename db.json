@@ -7,12 +7,6 @@
       "description": "This is a walletfor games"
     },
     {
-      "id": 2,
-      "name": "Wallet for household",
-      "owner": "Robert",
-      "description": "From this source the household will be taken care of"
-    },
-    {
       "id": 3,
       "name": "Wallet for investments",
       "owner": "Mihaa",
@@ -26,16 +20,6 @@
     }
   ],
   "transactions": [
-    {
-      "id": 1,
-      "title": "Car Injectors",
-      "type": "expense",
-      "walletId": 2,
-      "date": "01-01-2020",
-      "description": "some description for first expense",
-      "amount": 23,
-      "currency": "EUR"
-    },
     {
       "id": 2,
       "title": "Freelancer Website Project",
@@ -67,13 +51,13 @@
       "currency": "RON"
     },
     {
-      "id": 5,
-      "title": "League Of Legends Skin",
+      "id": 6,
+      "title": "test",
       "type": "expense",
-      "walletId": 2,
-      "date": "05-01-2020",
-      "description": "Katarina skin for new account",
-      "amount": 18.24,
+      "walletId": 3,
+      "date": "04-01-2020",
+      "description": "tes desc",
+      "amount": 121,
       "currency": "RON"
     }
   ]

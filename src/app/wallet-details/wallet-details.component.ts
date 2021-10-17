@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Location } from '@angular/common';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -7,6 +7,9 @@ import { TransactionModel } from 'app/models/transaction.model';
 import { WalletModel } from 'app/models/wallet.model';
 import { TransactionService } from 'app/services/transaction.service';
 import { WalletsService } from 'app/services/wallets.service';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-wallet-details',
@@ -14,7 +17,7 @@ import { WalletsService } from 'app/services/wallets.service';
   styleUrls: ['./wallet-details.component.scss']
 })
 export class WalletDetailsComponent implements OnInit {
-
+  
   walletData !: any;
   walletModelObj : WalletModel = new WalletModel();
   transactionsData !: any;
@@ -25,9 +28,15 @@ export class WalletDetailsComponent implements OnInit {
   options!: FormGroup;
   colorControl = new FormControl('primary');
 
-
   expenses : any;
   incomes : any;
+
+  displayedColumns = ['id','title', 'description','type','amount','date','actions'];
+
+  dataSource: MatTableDataSource<TransactionModel>;
+
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   constructor(
     private http: HttpClient,
@@ -40,11 +49,11 @@ export class WalletDetailsComponent implements OnInit {
     this.options = formBuilder.group({
       color: this.colorControl
     });
+    this.getWalletTransactions();
    }
 
   ngOnInit(): void {
     this.getWallet();
-    this.getWalletTransactions();
     this.getWalletExpenses();
     this.getWalletIncomes();
     this.formTransaction =  this.formBuilder.group({
@@ -52,7 +61,16 @@ export class WalletDetailsComponent implements OnInit {
       transactionDescription : [''],
       transactionAmount : [''],
       transactionType : ['']
-    })
+    });
+  }
+
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
+    this.dataSource.filter = filterValue;
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 
   getWallet(): void {
@@ -64,7 +82,12 @@ export class WalletDetailsComponent implements OnInit {
   getWalletTransactions(): void {
     const id = parseInt(this.route.snapshot.paramMap.get('walletId')!, 10);
     this.walletsService.getWalletTransactions(id)
-    .subscribe(res => this.transactionsData = res);
+    .subscribe(res => {
+      this.transactionsData = res; 
+      this.dataSource = new MatTableDataSource(res);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    });
   }
 
   getWalletExpenses(): void {

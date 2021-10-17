@@ -7,31 +7,33 @@ import { map } from 'rxjs/operators';
 })
 export class TransactionService {
 
+  private transactionsUrl = 'http://localhost:3000/transactions';
+  
   constructor(private http : HttpClient) { }
 
   getTransactions() {
-    return this.http.get<any>("http://localhost:3000/transactions")
+    return this.http.get<any>(this.transactionsUrl)
     .pipe(map((res : any) => {
       return res;
     }))
   }
 
   postTransaction(data : any) {
-    return this.http.post<any>("http://localhost:3000/transactions", data)
+    return this.http.post<any>(this.transactionsUrl, data)
     .pipe(map((res : any) => {
       return res;
     }))
   }
 
   updateTransaction(data :any, id: number) {
-    return this.http.put<any>("http://localhost:3000/transactions" + id, data)
+    return this.http.put<any>(this.transactionsUrl + id, data)
     .pipe(map((res : any) => {
       return res;
     }))
   }
 
   deleteTransaction(id: number) {
-    return this.http.delete<any>("http://localhost:3000/transactions/" + id)
+    return this.http.delete<any>(this.transactionsUrl + id)
     .pipe(map((res : any) => {
       return res;
     }))

@@ -31,6 +31,9 @@ import { MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select'
 import { MatGridListModule } from '@angular/material/grid-list';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+// import { MatTableDataSource } from '@angular/material/table'
 import {
   AgmCoreModule
 } from '@agm/core';
@@ -66,6 +69,9 @@ import { WalletDetailsComponent } from './wallet-details/wallet-details.componen
     MatOptionModule,
     MatSelectModule,
     MatGridListModule,
+    MatPaginatorModule,
+    MatSortModule,
+    // MatTableDataSource,
     NgbModule,
     AgmCoreModule.forRoot({
       apiKey: 'YOUR_GOOGLE_MAPS_API_KEY'

@@ -1,7 +1,7 @@
 <div class="main-content">
   <div class="container-fluid">
     <div class="row">
-      <div class="col-md-12">
+      <div class="col-md-6">
         <div class="card d-flex justify-content-center">
           <div class="card-header card-header-info">
             <div>
@@ -23,146 +23,102 @@
                 <p>3RON</p>
               </div>
             </div>
-            <hr>
-            <div class="transactions-list" style="margin-bottom:2em;">
-              <mat-tab-group mat-align-tabs="start" color="accent" backgroundColor="primary" style="margin: 1.5em 0;border-radius:6px;">
-                <mat-tab label="Expenses">
-                  <div class="list-of">
-                    <mat-card *ngFor="let expense of expenses" class="transaction" style="border:0.2px solid brown; margin: 1em 0; padding: 10px">
-                      <div class="details" style="height: auto;display:inline-block">
-                        <h3>{{ expense.date }}</h3>
-                        <h2>{{ expense.title }}</h2>
-                        <p>{{ expense.description }}(Description/Category) : walletId - {{ expense.walletId }}</p>
-                      </div>
-                      <div class="amount" style="float:right">
-                        <div class="sum">
-                          -{{ expense.amount }} {{ expense.currency }}
-                        </div>
-                        <div class="actions">
-                          <button mat-raised-button style="background: lightblue; color: #fff">
-                            <mat-icon>edit</mat-icon>
-                          </button>
-                          <button mat-raised-button color="warn">
-                            <mat-icon>delete</mat-icon>
-                          </button>
-                        </div>
-                      </div>
-                    </mat-card>
-                  </div>
-                </mat-tab>
-                <mat-tab label="Incomes">
-                  <div class="list-of">
-                    <mat-card *ngFor="let income of incomes" class="transaction" style="border:0.2px solid brown; margin: 1em 0; padding: 10px">
-                      <div class="details" style="height: auto;display:inline-block">
-                        <h3>{{ income.date }}</h3>
-                        <h2>{{ income.title }}</h2>
-                        <p>{{ income.description }}(Description/Category) : walletId - {{ income.walletId }}</p>
-                      </div>
-                      <div class="amount" style="float:right">
-                        <div class="sum">
-                        +{{ income.amount }} {{ income.currency }}
-                        </div>
-                        <div class="actions">
-                          <button mat-raised-button style="background: lightblue; color: #fff">
-                            <mat-icon>edit</mat-icon>
-                          </button>
-                          <button mat-raised-button color="warn">
-                            <mat-icon>delete</mat-icon>
-                          </button>
-                        </div>
-                      </div>
-                    </mat-card>
-                  </div>
-                </mat-tab>
-                <mat-tab label="All">
-                  <div class="list-of">
-                    <mat-card *ngFor="let transaction of transactionsData" class="transaction" style="border:0.2px solid brown; margin: 1em 0; padding: 10px">
-                      <div class="details" style="height: auto;display:inline-block">
-                        <h3>{{ transaction.date }}</h3>
-                        <h2>{{ transaction.title }}</h2>
-                        <p>{{ transaction.description }}(Description/Category) : walletId - {{ transaction.walletId }}</p>
-                      </div>
-                      <div class="amount" style="float:right">
-                        <div class="sum">
-                          <span *ngIf="(transaction.type == 'expense'); else isIncome">-</span>
-                          <ng-template #isIncome>+</ng-template>
-                          {{ transaction.amount }} {{ transaction.currency }}
-                        </div>
-                        <div class="actions">
-                          <button mat-raised-button style="background: lightblue; color: #fff">
-                            <mat-icon>edit</mat-icon>
-                          </button>
-                          <button mat-raised-button color="warn">
-                            <mat-icon>delete</mat-icon>
-                          </button>
-                        </div>
-                      </div>
-                    </mat-card>
-                  </div>
-                </mat-tab>
-              </mat-tab-group>
-            </div>
-            <mat-accordion class="example-headers-align">
-              <h1 style="text-align: center;">Add Transactions</h1>
-              <mat-expansion-panel style="border: 1px solid red;">
-                <mat-expansion-panel-header>
-                  <mat-panel-title>
-                    Complete the below fields
-                  </mat-panel-title>
-                  <mat-panel-description>
-                    Type the transaction details
-                  </mat-panel-description>
-                </mat-expansion-panel-header>
-                <form [formGroup]="formTransaction">
-                  <div class="form-row">
-                    <div class="form-group col-md-6">
-                      <mat-form-field appearance="fill">
-                        <mat-label>Title</mat-label>
-                        <input matInput formControlName="transactionTitle">
-                      </mat-form-field>
-                    </div>
-                    <div class="form-group col-md-6">
-                      <mat-form-field appearance="fill">
-                        <mat-label>Description</mat-label>
-                        <input matInput formControlName="transactionDescription">
-                      </mat-form-field>
-                    </div>
-                    <div class="form-group">
-                      <mat-form-field appearance="fill">
-                        <mat-label>Value</mat-label>
-                        <input matInput type="number" min="0" formControlName="transactionAmount">
-                      </mat-form-field>
-                    </div>
-                    <div class="form-group">
-                      <mat-form-field appearance="fill">
-                        <mat-label>Select Transaction Type</mat-label>
-                        <mat-select formControlName="transactionType">
-                          <mat-option value="income">Income</mat-option>
-                          <mat-option value="expense">Expense</mat-option>
-                        </mat-select>
-                      </mat-form-field>
-                    </div>
-                    <div class="form-group">
-                      <mat-form-field appearance="fill">
-                        <mat-label>Currency</mat-label>
-                        <input matInput formControlName="transactionCurrency">
-                      </mat-form-field>
-                    </div>
-                  </div>
-                </form>
-                <button mat-raised-button color="primary" (click)="postTransaction()">Add</button>
-              </mat-expansion-panel>
-            </mat-accordion>
           </div>
-          <div class="card-footer">
+          <!-- <div class="card-footer">
             <mat-card-actions>
               <button mat-button class="go-back-btn" (click)="goBack()">
                 <mat-icon>keyboard_backspace</mat-icon>
               </button>
             </mat-card-actions>
+          </div> -->
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card d-flex justify-content-center">
+          <div class="card-header card-header-warning">
+            <h4 class="card-title text-center text-uppercase">Wallet Statistics</h4>
+          </div>
+          <div class="card-body py-3">
+
+          </div>
+          <div class="card-footer">
+
           </div>
         </div>
       </div>
     </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card d-flex justify-content-center">
+          <div class="card-header card-header-primary text-center text-uppercase">
+            <h5 class="card-title text-center text-uppercase">Transactions</h5>
+          </div>
+          <div class="card-body py-5">
+            <mat-form-field appearance="standard">
+              <mat-label>Filter</mat-label>
+              <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Ex. Mia" #input>
+            </mat-form-field>
+
+            <table mat-table [dataSource]="dataSource" matSort>
+              <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="text-primary">Id</th>
+                <td mat-cell *matCellDef="let element">{{element.id}}</td>
+              </ng-container>
+              <ng-container matColumnDef="title">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="text-primary">title</th>
+                <td mat-cell *matCellDef="let element">{{element.title}}</td>
+              </ng-container>
+              <ng-container matColumnDef="description">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="text-primary"> description </th>
+                <td mat-cell *matCellDef="let element">{{element.description}}</td>
+              </ng-container>
+              <ng-container matColumnDef="type">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="text-primary"> type </th>
+                <td mat-cell *matCellDef="let element" class="text-uppercase font-weight-bold"
+                [ngStyle]="element.type == 'income' ? { 'color':'green' } : {'color': 'red'}">{{ element.type }}</td>
+              </ng-container>
+              <ng-container matColumnDef="amount">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="text-primary"> amount </th>
+                <td mat-cell *matCellDef="let element">{{element.amount}}</td>
+              </ng-container>
+              <ng-container matColumnDef="date">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="text-primary"> date </th>
+                <td mat-cell *matCellDef="let element">{{element.date}}</td>
+              </ng-container>
+              <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="text-primary"> Actions </th>
+                <td mat-cell *matCellDef="let element">
+                  <div class="actions">
+                    <button class="btn btn-info" data-toggle="modal" data-target="#exampleModal">
+                      <mat-icon>edit</mat-icon>
+                    </button>
+                    <button class="btn btn-danger">
+                      <mat-icon>delete</mat-icon>
+                    </button>
+                  </div>
+                </td>
+              </ng-container>
+
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+              <tr class="mat-row" *matNoDataRow>
+                <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+              </tr>
+            </table>
+            
+            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of transactions"></mat-paginator>
+          </div>
+          <div class="card-footer"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-actions">
+    <button mat-fab color="primary" aria-label="Go buton" (click)="goBack()" style="position: fixed; bottom: 15px; right: 15px; z-index: 2" >
+      <mat-icon>keyboard_backspace</mat-icon>
+    </button>
   </div>
 </div>

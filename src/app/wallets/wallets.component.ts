@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { WalletModel } from 'app/models/wallet.model';
 import { WalletsService } from 'app/services/wallets.service';
+import { WalletsSupaService } from 'app/services/wallets-supa.service';
+
 declare var $: any;
 
 @Component({
@@ -10,6 +12,12 @@ declare var $: any;
   styleUrls: ['./wallets.component.scss']
 })
 export class WalletsComponent implements OnInit {
+
+  /*Supa*/
+  // wallets: WalletModel[];
+  // wallet: WalletModel;
+  // actionLabel: string;
+  /*Supa End*/
 
   walletWord !: any;
   
@@ -22,9 +30,16 @@ export class WalletsComponent implements OnInit {
   constructor(
     private walletsService: WalletsService,
     private formBuilder: FormBuilder,
+    private api: WalletsSupaService
   ) { }
 
   ngOnInit(): void {
+    /*SUPA*/
+    // let listen = this.api.listenAll();
+    // this.api.getWallets().then((data) => (this.wallets = data.wallets));
+    // this.clear();
+  /*ENDSUPA*/
+
     this.getAllWallets();
     this.formValue =  this.formBuilder.group({
       walletName : [''],
@@ -138,5 +153,57 @@ export class WalletsComponent implements OnInit {
           '<a href="{3}" target="{4}" data-notify="url"></a>' +
         '</div>'
     });
-}
+  }
+
+  // addWallet() {
+  //   if (this.wallet.id) {
+  //     //Update if exists ID{
+  //     this.update();
+  //     return;
+  //   }
+  //   this.api
+  //     .addWallet(this.wallet)
+  //     .then((payload) => {
+  //       this.wallets.push(payload.data[0]);
+  //     })
+  //     .catch((err) => console.log(`Error in add WALLET ${err}`));
+  //   this.clear();
+  // }
+
+  // editWallet(wallet: WalletModel) {
+  //   this.wallet = wallet;
+  //   this.actionLabel = 'UPDATE';
+  // }
+
+  // update() {
+  //   this.api.update(this.wallet).then(() => {
+  //     let foundIndex = this.wallets.findIndex((t) => t.id == this.wallet.id);
+  //     this.wallets[foundIndex] = this.wallet;
+  //     this.clear();
+  //   });
+  // }
+
+  // checkWallet(walletCheck: WalletModel) {
+  //   walletCheck.done = !walletCheck.done;
+  //   this.api.updateCheck(walletCheck);
+  // }
+
+  // delete(wallet: WalletModel) {
+  //   this.api
+  //     .deleteWallet(wallet.id)
+  //     .then((res) => {
+  //       (this.wallets = this.arrayRemove(this.wallets, wallet.id));
+  //       // console.log('res', res.data)
+  //     });
+
+  // }
+
+  // arrayRemove(arr: WalletModel[], id: number) {
+  //   return arr.filter((ele) => ele.id != id);
+  // }
+
+  // clear() {
+  //   this.wallet = new WalletModel();
+  //   this.actionLabel = 'ADD';
+  // }
 }
