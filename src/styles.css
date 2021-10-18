@@ -1,1 +1,20 @@
 /* You can add global styles to this file, and also import other style files */
+/* .cdk-global-overlay-wrapper, .cdk-overlay-container { z-index: 9999!important; }  */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+form.normal-form{
+    margin:10px;
+}
+
+.controles-container{
+    width: 100%;
+    padding: 5px;
+}
+
+.controles-container > * {
+    width: 100%;
+}
+
+.button-row button {
+    margin: 5px;
+}

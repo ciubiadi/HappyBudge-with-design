@@ -6,18 +6,15 @@ import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
 import { AppComponent } from './app.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-// import { UserProfileComponent } from './user-profile/user-profile.component';
-import { TableListComponent } from './table-list/table-list.component';
-// import { IconsComponent } from './icons/icons.component';
-// import { MapsComponent } from './maps/maps.component';
-// import { NotificationsComponent } from './notifications/notifications.component';
+// import { DashboardComponent } from './dashboard/dashboard.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { WalletsComponent } from './wallets/wallets.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatSidenavModule} from '@angular/material/sidenav';
 import { MatCardModule } from '@angular/material/card';
 import { MatTabsModule } from '@angular/material/tabs';
@@ -26,18 +23,16 @@ import { MatExpansionModule} from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select'
 import { MatGridListModule } from '@angular/material/grid-list';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
-// import { MatTableDataSource } from '@angular/material/table'
-import {
-  AgmCoreModule
-} from '@agm/core';
+import { MatDialogModule } from '@angular/material/dialog';
+import { TransactionService } from './services/transaction.service';
+import { AgmCoreModule } from '@agm/core';
 import { WalletDetailsComponent } from './wallet-details/wallet-details.component';
+import { DialogAddTransactionsComponent } from './dialog-add-transactions/dialog-add-transactions.component';
 
 
 @NgModule({
@@ -64,27 +59,29 @@ import { WalletDetailsComponent } from './wallet-details/wallet-details.componen
     MatInputModule,
     HttpClientModule,
     MatDatepickerModule,
-    ReactiveFormsModule,
     Ng2SearchPipeModule,
     MatOptionModule,
     MatSelectModule,
     MatGridListModule,
     MatPaginatorModule,
     MatSortModule,
+    MatDialogModule,
     // MatTableDataSource,
     NgbModule,
-    AgmCoreModule.forRoot({
-      apiKey: 'YOUR_GOOGLE_MAPS_API_KEY'
-    })
+    AgmCoreModule.forRoot({apiKey: 'YOUR_GOOGLE_MAPS_API_KEY'})
   ],
   declarations: [
     AppComponent,
     AdminLayoutComponent,
     WalletsComponent,
     WalletDetailsComponent,
+    DialogAddTransactionsComponent,
 
   ],
-  providers: [],
+  entryComponents: [
+    DialogAddTransactionsComponent
+  ],
+  providers: [TransactionService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

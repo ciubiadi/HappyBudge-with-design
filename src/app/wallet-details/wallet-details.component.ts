@@ -10,6 +10,9 @@ import { WalletsService } from 'app/services/wallets.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatDatepicker } from '@angular/material/datepicker';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { DialogAddTransactionsComponent } from 'app/dialog-add-transactions/dialog-add-transactions.component';
 
 declare var $: any;
 
@@ -48,7 +51,8 @@ export class WalletDetailsComponent implements OnInit {
     private transactionsService: TransactionService,
     private route: ActivatedRoute,
     private location: Location,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private dialog: MatDialog
   ) {
     this.options = formBuilder.group({
       color: this.colorControl
@@ -68,6 +72,30 @@ export class WalletDetailsComponent implements OnInit {
       transactionAmount : [''],
       transactionDate: ['']
     });
+  }
+
+  clickAddTransaction2(): void {
+    const dialogConfig = new MatDialogConfig();
+    // dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = "500px"; 
+    dialogConfig.height = "600px"; 
+    this.dialog.open(DialogAddTransactionsComponent, dialogConfig);
+
+    // let dialogRef = this.dialog.open(DialogAddTransactionsComponent,
+    //   {
+    //     data: {
+    //       age: 100,
+    //       name: 'king'
+    //     },
+    //     width:"500px",
+    //     height:"500px"
+    //   });
+      // dialogRef.afterClosed().subscribe(
+        // result => {
+          // alert(result.name);
+        // }
+      // );
   }
 
   applyFilter(filterValue: string) {

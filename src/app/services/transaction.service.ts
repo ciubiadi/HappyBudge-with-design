@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,26 @@ export class TransactionService {
   private transactionsUrl = 'http://localhost:3000/transactions/';
   
   constructor(private http : HttpClient) { }
+
+  form: FormGroup = new FormGroup({
+    $key: new FormControl(null),
+    title: new FormControl('', Validators.required),
+    type: new FormControl(''),
+    description: new FormControl('', Validators.required),
+    amount: new FormControl('', Validators.required),
+    date: new FormControl(''),
+  });
+
+  initializeFormGroup() {
+    this.form.setValue({
+      $key: null,
+      title: '',
+      type: '',
+      description: '',
+      amount: '',
+      date: ''
+    })
+  }
 
   getTransactions() {
     return this.http.get<any>(this.transactionsUrl)

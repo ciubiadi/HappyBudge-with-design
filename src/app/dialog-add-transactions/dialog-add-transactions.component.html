@@ -1,0 +1,38 @@
+<form [formGroup]="transactionService.form" class="normal-form">
+    <mat-grid-list cols="1">
+        <mat-grid-tile style="box-sizing: border-box;">
+            <div class="controles-container">
+                <input type="hidden" formControlNaem="$key">
+                <mat-form-field>
+                    <input formControlName="title" matInput placeholder="Transaction Title*">
+                    <mat-error>This field is mandatory.</mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-select formControlName="type" placeholder="Transaction Type">
+                        <ng-container *ngFor="let transactionTypeData of transactionTypesData">
+                            <mat-option value="{{ transactionTypeData.id }}">{{ transactionTypeData.value }}</mat-option>
+                        </ng-container>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field>
+                    <input formControlName="description" matInput placeholder="Transaction Description*">
+                    <mat-error>This field is mandatory.</mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <input formControlName="amount" matInput placeholder="Transaction Amount*">
+                    <mat-error>This field is mandatory.</mat-error>
+                </mat-form-field>
+                <!-- <mat-form-field>
+                    <input formControlName="date" matInput [matDatepicker]="picker" placeholder="Transaction Date*">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                    <mat-error>This field is mandatory.</mat-error>
+                </mat-form-field> -->
+                <div class="button-row">
+                    <button mat-raised-button color="primary" type="submit" [disabled]="transactionService.form.invalid">Submit</button>
+                    <button mat-raised-button color="secondary" (click)="onClear()">Clear</button>
+                </div>
+            </div>
+        </mat-grid-tile>
+    </mat-grid-list>
+</form>

@@ -58,11 +58,14 @@
             <div class="flex-div" style="display:flex; justify-content: space-between;">
               <mat-form-field appearance="standard" style="width: 20%">
                 <mat-label>Filter</mat-label>
-                <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Ex. Mia" #input>
+                <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Ex. Groceries from LIDL" #input>
               </mat-form-field>
               <div class="add-new-transaction">
                 <button class="btn btn-success" (click)="clickAddTransaction()" data-toggle="modal" data-target="#exampleModal">
-                  Add Entry
+                  <mat-icon>add</mat-icon> Add Transaction
+                </button>
+                <button class="btn btn-warning" (click)="clickAddTransaction2()">
+                  <mat-icon>add</mat-icon> Add Transaction 2
                 </button>
               </div>
             </div>
@@ -93,7 +96,7 @@
                 <td mat-cell *matCellDef="let element">{{element.date}}</td>
               </ng-container>
               <ng-container matColumnDef="actions">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header class="text-primary"> Actions </th>
+                <th mat-header-cell *matHeaderCellDef class="text-primary"> Actions </th>
                 <td mat-cell *matCellDef="let element">
                   <div class="actions">
                     <button class="btn btn-info" (click)="onEdit(element)" data-toggle="modal" data-target="#exampleModal">
@@ -142,6 +145,10 @@
               <mat-form-field class="form-field-full-width" appearance="fill">
                 <mat-label for="transactionType">Transaction Type</mat-label>
                 <input type="text" formControlName="transactionType" id="transactionType" aria-describedby="transactionType" matInput>
+                <!-- <mat-select formControlName="transactionType" id="transactionType" aria-describedby="transactionType">
+                  <mat-option value="income">income</mat-option>
+                  <mat-option value="expense">expense</mat-option>
+                </mat-select> -->
               </mat-form-field>
               <mat-form-field class="form-field-full-width" appearance="fill">
                 <mat-label for="transactionDescription">Transaction Description</mat-label>
@@ -157,6 +164,9 @@
               <mat-form-field class="form-field-full-width" appearance="fill">
                 <mat-label for="transactionDate">Transaction Date</mat-label>
                 <input type="text" formControlName="transactionDate" id="transactionDate" aria-describedby="transactionDate" matInput>
+                <!-- <input formControlName="transactionDate" id="transactionDate" aria-describedby="transactionDate" matInput [matDatepicker]="picker">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker> -->
               </mat-form-field>
             </form>
           </div>
