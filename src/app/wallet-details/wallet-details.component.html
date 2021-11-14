@@ -108,14 +108,25 @@
                   </div>
                 </td>
               </ng-container>
-
+              <ng-container matColumnDef="loading">
+                <mat-footer-cell *matFooterCellDef collspan="4">
+                  Loading data...
+                </mat-footer-cell>
+              </ng-container>
+              <ng-container matColumnDef="noData">
+                <mat-footer-cell *matFooterCellDef collspan="4">
+                  No transactions to load.
+                </mat-footer-cell>
+              </ng-container>
 
               <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
               <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
-              <tr class="mat-row" *matNoDataRow>
+              <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':dataSource!=null}"></mat-footer-row>
+              <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':!(dataSource!=null && dataSource.data.length==0)}"></mat-footer-row>
+              <!-- <tr class="mat-row" *matNoDataRow>
                 <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
-              </tr>
+              </tr> -->
             </table>
             
             <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of transactions"></mat-paginator>
@@ -164,9 +175,6 @@
               <mat-form-field class="form-field-full-width" appearance="fill">
                 <mat-label for="transactionDate">Transaction Date</mat-label>
                 <input type="text" formControlName="transactionDate" id="transactionDate" aria-describedby="transactionDate" matInput>
-                <!-- <input formControlName="transactionDate" id="transactionDate" aria-describedby="transactionDate" matInput [matDatepicker]="picker">
-                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker> -->
               </mat-form-field>
             </form>
           </div>

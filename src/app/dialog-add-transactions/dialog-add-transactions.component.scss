@@ -1,4 +1,4 @@
-form.normal-form{
+.normal-form{
     margin:10px;
 }
 
@@ -13,4 +13,12 @@ form.normal-form{
 
 .button-row button {
     margin: 5px;
+}
+
+.normal-form mat-form-field {
+    margin-bottom: 0.8em;
+}
+
+.normal-form {
+    margin: 10px;
 }

@@ -11,8 +11,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDatepicker } from '@angular/material/datepicker';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { DialogAddTransactionsComponent } from 'app/dialog-add-transactions/dialog-add-transactions.component';
+import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
+// import { DialogAddTransactionsComponent } from 'app/dialog-add-transactions/dialog-add-transactions.component';
 
 declare var $: any;
 
@@ -52,7 +52,8 @@ export class WalletDetailsComponent implements OnInit {
     private route: ActivatedRoute,
     private location: Location,
     private formBuilder: FormBuilder,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private dialogRef: MatDialogRef<WalletDetailsComponent>
   ) {
     this.options = formBuilder.group({
       color: this.colorControl
@@ -74,13 +75,30 @@ export class WalletDetailsComponent implements OnInit {
     });
   }
 
+  onSubmit() {
+    if(this.transactionsService.form.valid) {
+      this.transactionsService.postTransaction(this.transactionsService.form.value);
+      this.transactionsService.form.reset();
+      this.transactionsService.initializeFormGroup();
+      this.showNotification('::Submitted succesfully', 'success');
+      this.onClose();
+    }
+  }
+
+  onClose() {
+    this.transactionsService.form.reset();
+    this.transactionsService.initializeFormGroup();
+    this.dialogRef.close();
+  }
+
   clickAddTransaction2(): void {
+    this.transactionsService.initializeFormGroup();
     const dialogConfig = new MatDialogConfig();
     // dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = "500px"; 
-    dialogConfig.height = "600px"; 
-    this.dialog.open(DialogAddTransactionsComponent, dialogConfig);
+
+    // this.dialog.open(DialogAddTransactionsComponent, dialogConfig);
 
     // let dialogRef = this.dialog.open(DialogAddTransactionsComponent,
     //   {

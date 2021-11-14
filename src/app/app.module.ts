@@ -23,7 +23,7 @@ import { MatExpansionModule} from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatOptionModule } from '@angular/material/core';
+import { MatNativeDateModule, MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select'
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -33,6 +33,7 @@ import { TransactionService } from './services/transaction.service';
 import { AgmCoreModule } from '@agm/core';
 import { WalletDetailsComponent } from './wallet-details/wallet-details.component';
 import { DialogAddTransactionsComponent } from './dialog-add-transactions/dialog-add-transactions.component';
+import { WalletsService } from './services/wallets.service';
 
 
 @NgModule({
@@ -59,6 +60,7 @@ import { DialogAddTransactionsComponent } from './dialog-add-transactions/dialog
     MatInputModule,
     HttpClientModule,
     MatDatepickerModule,
+    MatNativeDateModule,
     Ng2SearchPipeModule,
     MatOptionModule,
     MatSelectModule,
@@ -81,7 +83,7 @@ import { DialogAddTransactionsComponent } from './dialog-add-transactions/dialog
   entryComponents: [
     DialogAddTransactionsComponent
   ],
-  providers: [TransactionService],
+  providers: [TransactionService, WalletsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

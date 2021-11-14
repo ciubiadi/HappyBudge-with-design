@@ -12,6 +12,6 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'wallets',           component: WalletsComponent },
     { path: 'wallets/:walletId', component: WalletDetailsComponent },
     // { path: 'user-profile',      component: UserProfileComponent },
-    { path: 'table-list',        component: TableListComponent },
+    // { path: 'table-list',        component: TableListComponent },
     // { path: 'notifications',     component: NotificationsComponent },
 ];

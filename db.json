@@ -53,7 +53,7 @@
     {
       "id": 6,
       "title": "test2",
-      "type": "test2",
+      "type": "income",
       "walletId": 3,
       "date": "test2",
       "description": "test2",
@@ -61,33 +61,23 @@
       "currency": "RON"
     },
     {
-      "id": 7,
-      "title": "test3",
-      "type": "test3",
-      "walletId": 3,
-      "date": "test3",
-      "description": "test3",
-      "amount": "test3",
-      "currency": "RON"
-    },
-    {
-      "id": 8,
-      "title": "test4",
-      "type": "test4",
-      "walletId": 3,
-      "date": "test4",
-      "description": "test4",
-      "amount": "test4",
-      "currency": "RON"
-    },
-    {
       "id": 9,
       "title": "test5",
-      "type": "test5",
+      "type": "EXPENSE",
       "walletId": 3,
       "date": "test5",
       "description": "test5",
       "amount": "test5",
+      "currency": "RON"
+    },
+    {
+      "id": 10,
+      "title": "test",
+      "type": "income",
+      "walletId": 3,
+      "date": "test",
+      "description": "test",
+      "amount": "test",
       "currency": "RON"
     }
   ]

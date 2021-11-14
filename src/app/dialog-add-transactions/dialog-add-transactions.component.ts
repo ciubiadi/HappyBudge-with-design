@@ -15,9 +15,15 @@ export class DialogAddTransactionsComponent implements OnInit {
     public transactionService: TransactionService
     ) { }
 
-    transactionTypesData = [
+    transactionTypes = [
       { id: 1, value: 'income'},
       { id: 2, value: 'expense'}
+    ];
+  
+    currencies = [
+      { id: 1, value: 'USD'},
+      { id: 2, value: 'EUR'},
+      { id: 3, value: 'RON'}
     ];
 
   ngOnInit(): void {
