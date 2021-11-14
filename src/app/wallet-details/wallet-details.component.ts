@@ -14,8 +14,6 @@ import { MatDatepicker } from '@angular/material/datepicker';
 import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
 // import { DialogAddTransactionsComponent } from 'app/dialog-add-transactions/dialog-add-transactions.component';
 
-declare var $: any;
-
 @Component({
   selector: 'app-wallet-details',
   templateUrl: './wallet-details.component.html',
@@ -23,7 +21,6 @@ declare var $: any;
 })
 export class WalletDetailsComponent implements OnInit {
   
-  walletId !: any;
   walletData !: any;
   walletModelObj : WalletModel = new WalletModel();
   transactionsData !: any;
@@ -32,7 +29,6 @@ export class WalletDetailsComponent implements OnInit {
 
   formTransaction !: FormGroup;
   options!: FormGroup;
-  showAdd!: boolean;
   colorControl = new FormControl('primary');
 
   expenses : any;
@@ -59,7 +55,6 @@ export class WalletDetailsComponent implements OnInit {
       color: this.colorControl
     });
     this.getWalletTransactions();
-    this.walletId = parseInt(this.route.snapshot.paramMap.get('walletId')!, 10);
    }
 
   ngOnInit(): void {
@@ -68,10 +63,9 @@ export class WalletDetailsComponent implements OnInit {
     this.getWalletIncomes();
     this.formTransaction =  this.formBuilder.group({
       transactionTitle : [''],
-      transactionType : [''],
       transactionDescription : [''],
       transactionAmount : [''],
-      transactionDate: ['']
+      transactionType : ['']
     });
   }
 
@@ -160,7 +154,9 @@ export class WalletDetailsComponent implements OnInit {
     let finalDate = date.getDate() + "/" + (date.getMonth()+1) + "/" + date.getFullYear(); 
     console.log(finalDate);
     this.transactionModelObj.title = this.formTransaction.value.transactionTitle;
+    // this.walletsData[0].name = this.formValue.value.walletName;
     this.transactionModelObj.description = this.formTransaction.value.transactionDescription;
+    // this.walletsData[0].owner = this.formValue.value.ownerName;
     this.transactionModelObj.amount = this.formTransaction.value.transactionAmount;
     this.transactionModelObj.type = this.formTransaction.value.transactionType;
     this.transactionModelObj.walletId = id;
@@ -180,112 +176,8 @@ export class WalletDetailsComponent implements OnInit {
       alert("Something went wrong");
     })
   }
-
-  onEdit(transaction: any) {
-    this.showAdd = false;
-
-    this.transactionModelObj.id = transaction.id;
-    this.formTransaction.controls['transactionTitle'].setValue(transaction.title);
-    this.formTransaction.controls['transactionType'].setValue(transaction.type);
-    this.formTransaction.controls['transactionDescription'].setValue(transaction.description);
-    this.formTransaction.controls['transactionAmount'].setValue(transaction.amount);
-    this.formTransaction.controls['transactionDate'].setValue(transaction.date);
-  }
-
-  deleteTransaction(transaction: any) {
-    this.transactionsService.deleteTransaction(transaction.id).subscribe(res => {
-      this.showNotification('Transaction Deleted Succesfully', 'warning');
-      this.getWalletTransactions();
-    });
-  }
-
-  updateTransactionDetails(){
-    this.transactionModelObj.title = this.formTransaction.value.transactionTitle;
-    this.transactionModelObj.walletId = this.walletId;
-    this.transactionModelObj.description = this.formTransaction.value.transactionDescription;
-    this.transactionModelObj.type = this.formTransaction.value.transactionType;
-    this.transactionModelObj.amount = this.formTransaction.value.transactionAmount;
-    this.transactionModelObj.currency = "RON";
-    this.transactionModelObj.date = this.formTransaction.value.transactionDate;
- 
-    this.transactionsService.updateTransaction(this.transactionModelObj, this.transactionModelObj.id)
-    .subscribe(res => {
-      this.showNotification('Transaction Updated Succesfully', 'info');
-      let ref = document.getElementById('cancel');
-      ref?.click() ;
-      this.formTransaction.reset(); 
-      this.getWalletTransactions();
-    });
-  }
-
-  clickAddTransaction() {
-    this.formTransaction.reset();
-    this.showAdd = true;
-  }
-
-  postTransactionDetails() {
-    this.transactionModelObj.title = this.formTransaction.value.transactionTitle;
-    this.transactionModelObj.walletId = this.walletId;
-    this.transactionModelObj.description = this.formTransaction.value.transactionDescription;
-    this.transactionModelObj.type = this.formTransaction.value.transactionType;
-    this.transactionModelObj.amount = this.formTransaction.value.transactionAmount;
-    this.transactionModelObj.currency = "RON";
-    this.transactionModelObj.date = this.formTransaction.value.transactionDate;
-
-    this.transactionsService.postTransaction(this.transactionModelObj)
-    .subscribe(res => {
-      console.log(this.transactionModelObj);
-      this.showNotification('Transaction Added Succesfully', 'success');
-      let ref = document.getElementById('cancel');
-      ref?.click() ;
-      this.formTransaction.reset();
-      this.transactionsData.push(res);
-    },
-    err => {
-      this.showNotification('Something went wrong', 'danger');
-    })
-  }
   
   goBack(): void {
     this.location.back();
-  }
-
-  showNotification(msg, typeColor){
-    let iconType = '';
-    switch(typeColor) {
-      case 'danger':
-        iconType = 'error_outline';
-        break;
-      case 'warning':
-        iconType = 'delete_forever';
-        break;
-      case 'success':
-        iconType = 'task_alt';
-        break;
-      default:
-        iconType = 'notifications'
-    }
-    $.notify({
-        title: iconType,
-        message: msg
-    },{
-        type: typeColor,
-        timer: 50000,
-        placement: {
-            from: 'bottom',
-            align: 'right'
-        },
-        template: 
-        '<div data-notify="container" class="col-xl-4 col-lg-4 col-11 col-sm-4 col-md-4 alert alert-{0} alert-with-icon" role="alert">' +
-          '<button mat-button  type="button" aria-hidden="true" class="close mat-button" data-notify="dismiss">  <i class="material-icons">close</i></button>' +
-          '<i class="material-icons" data-notify="icon">{1}</i> ' +
-          // '<span data-notify="title"></span> ' +
-          '<span data-notify="message">{2}</span>' +
-          '<div class="progress" data-notify="progressbar">' +
-            '<div class="progress-bar progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>' +
-          '</div>' +
-          '<a href="{3}" target="{4}" data-notify="url"></a>' +
-        '</div>'
-    });
   }
 }

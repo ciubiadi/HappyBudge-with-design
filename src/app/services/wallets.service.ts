@@ -25,6 +25,14 @@ export class WalletsService {
     private http: HttpClient
     ) { }
 
+    // getShowAdd() {
+    //   return this.showAdd;
+    // }
+  
+    // setShowAdd(newValue: any) {
+    //   this.showAdd = newValue;
+    // }
+  
     /* WALLETS */
     postWallet(data : any) {
       return this.http.post<any>(this.walletsUrl, data)

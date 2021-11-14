@@ -8,7 +8,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class TransactionService {
 
-  private transactionsUrl = 'http://localhost:3000/transactions/';
+  private transactionsUrl = 'http://localhost:3000/transactions';
   
   constructor(private http : HttpClient) { }
 

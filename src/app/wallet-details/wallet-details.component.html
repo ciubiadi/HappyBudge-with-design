@@ -55,6 +55,7 @@
             <h5 class="card-title text-center text-uppercase">Transactions</h5>
           </div>
           <div class="card-body py-5">
+<<<<<<< HEAD
             <div class="flex-div" style="display:flex; justify-content: space-between;">
               <mat-form-field appearance="standard" style="width: 20%">
                 <mat-label>Filter</mat-label>
@@ -69,6 +70,13 @@
                 </button>
               </div>
             </div>
+=======
+            <mat-form-field appearance="standard">
+              <mat-label>Filter</mat-label>
+              <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Ex. Mia" #input>
+            </mat-form-field>
+
+>>>>>>> parent of 3497252 (transactions CRUD finished)
             <table mat-table [dataSource]="dataSource" matSort>
               <ng-container matColumnDef="id">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header class="text-primary">Id</th>
@@ -89,7 +97,7 @@
               </ng-container>
               <ng-container matColumnDef="amount">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header class="text-primary"> amount </th>
-                <td mat-cell *matCellDef="let element">{{element.amount}} {{ element.currency }}</td>
+                <td mat-cell *matCellDef="let element">{{element.amount}}</td>
               </ng-container>
               <ng-container matColumnDef="date">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header class="text-primary"> date </th>
@@ -99,10 +107,10 @@
                 <th mat-header-cell *matHeaderCellDef class="text-primary"> Actions </th>
                 <td mat-cell *matCellDef="let element">
                   <div class="actions">
-                    <button class="btn btn-info" (click)="onEdit(element)" data-toggle="modal" data-target="#exampleModal">
+                    <button class="btn btn-info" data-toggle="modal" data-target="#exampleModal">
                       <mat-icon>edit</mat-icon>
                     </button>
-                    <button class="btn btn-danger" (click)="deleteTransaction(element)">
+                    <button class="btn btn-danger">
                       <mat-icon>delete</mat-icon>
                     </button>
                   </div>
@@ -135,6 +143,7 @@
         </div>
       </div>
     </div>
+<<<<<<< HEAD
 
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -189,6 +198,8 @@
       </div>
     </div>
 
+=======
+>>>>>>> parent of 3497252 (transactions CRUD finished)
   </div>
   <div class="footer-actions">
     <button mat-fab color="primary" aria-label="Go buton" (click)="goBack()" style="position: fixed; bottom: 15px; right: 15px; z-index: 2" >

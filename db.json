@@ -32,7 +32,7 @@
     },
     {
       "id": 4,
-      "title": "Music Show Pub Test",
+      "title": "Music Show Pub",
       "type": "income",
       "walletId": 3,
       "date": "04-01-2020",
@@ -41,6 +41,7 @@
       "currency": "RON"
     },
     {
+<<<<<<< HEAD
       "id": 5,
       "title": "test1",
       "type": "income",
@@ -78,6 +79,15 @@
       "date": "test",
       "description": "test",
       "amount": "test",
+=======
+      "id": 6,
+      "title": "test",
+      "type": "expense",
+      "walletId": 3,
+      "date": "04-01-2020",
+      "description": "tes desc",
+      "amount": 121,
+>>>>>>> parent of 3497252 (transactions CRUD finished)
       "currency": "RON"
     }
   ]
